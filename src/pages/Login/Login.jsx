@@ -1,14 +1,21 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Login = () => {
+  const { signIn } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
-    console.log(data);
+    signIn(data.email, data.password).then((result) => {
+      const user = result.user;
+      console.log(user);
+    });
   };
 
   return (
@@ -25,13 +32,11 @@ const Login = () => {
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-[#242323] font-semibold">
             <div className="text-center">
               <button className="w-10 h-10 mt-4 items-center justify-center inline-flex rounded-full font-bold text-blue-700 text-lg border-2 border-blue-700">
-                f
+                G
               </button>
-              <p className="text-gray-100 pt-2">
-                    or use email your account
-                </p>
+              <p className="text-gray-100 pt-2">or use email your account</p>
             </div>
-            
+
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">
@@ -73,12 +78,13 @@ const Login = () => {
                     Forgot password?
                   </a>
 
-                  <Link to="/register" className="label-text-alt  text-white pt-4">
+                  <Link
+                    to="/register"
+                    className="label-text-alt  text-white pt-4"
+                  >
                     Register
                   </Link>
                 </label>
-                
-                  
               </div>
               <div className="form-control mt-3">
                 <input

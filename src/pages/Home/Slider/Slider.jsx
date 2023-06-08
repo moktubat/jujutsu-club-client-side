@@ -4,7 +4,7 @@ const Slider = () => {
         <div className="carousel w-full relative">
           <div id="slide1" className="carousel-item relative w-full">
             <img
-              src="https://png.pngtree.com/background/20210711/original/pngtree-simple-outdoor-summer-camp-poster-picture-image_1121652.jpg"
+              src="https://taekwondo-berlin.com/wp-content/uploads/2017/06/young-girl-training-karate-on-blue-background-PYAMLMQ.jpg"
               className="w-full h-full object-cover"
               alt="Slide 1"
             />
@@ -25,7 +25,7 @@ const Slider = () => {
 
           <div id="slide2" className="carousel-item relative w-full">
             <img
-              src="https://png.pngtree.com/background/20210711/original/pngtree-simple-outdoor-summer-camp-background-material-picture-image_1089632.jpg"
+              src="https://i0.wp.com/sana-edu.com/wp-content/uploads/2022/10/1.jpg"
               className="w-full h-full object-cover"
               alt="Slide 1"
             />
@@ -46,7 +46,7 @@ const Slider = () => {
 
           <div id="slide3" className="carousel-item relative w-full">
             <img
-              src="https://png.pngtree.com/background/20210711/original/pngtree-summer-camp-banner-background-picture-image_1089339.jpg"
+              src="https://fight2win.nl/wp-content/uploads/sites/2/2019/06/Fight2Win-nieuws-voordelen-van-kickboksen-voor-kinderen.jpg"
               className="w-full h-full object-cover"
               alt="Slide 1"
             />

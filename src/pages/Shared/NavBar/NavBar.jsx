@@ -11,7 +11,7 @@ const NavBar = () => {
       <Link className="text-white font-semibold" href="/">Home</Link>
       <Link className="text-white font-semibold" href="#">Instructors</Link>
       <Link className="text-white font-semibold" href="#">Classes</Link>
-      <Link className="text-white font-semibold" href="#">Login</Link>
+      <Link className="text-white font-semibold" to="/login">Login</Link>
     </>
   );
 

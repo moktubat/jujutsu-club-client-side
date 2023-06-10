@@ -49,7 +49,7 @@ const NavBar = () => {
   );
 
   return (
-    <nav className="bg-slate-500">
+    <nav className="bg-[#252525]">
       <div className="max-w-4xl mx-auto">
         <div className="flex mx-auto justify-between w-3/4 ">
           {/* Primary menu and logo */}
@@ -88,7 +88,7 @@ const NavBar = () => {
       </div>
       {/* mobile navigation */}
       <div
-        className={`fixed z-40 w-full  bg-slate-500 overflow-hidden flex flex-col lg:hidden gap-12  origin-top duration-700 ${
+        className={`fixed z-40 w-full  bg-[#252525] overflow-hidden flex flex-col lg:hidden gap-12  origin-top duration-700 ${
           !toggleMenu ? "h-0" : "h-full"
         }`}
       >

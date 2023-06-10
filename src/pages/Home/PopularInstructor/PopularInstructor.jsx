@@ -7,7 +7,7 @@ const PopularInstructor = () => {
     fetch("http://localhost:5000/popularInstructor")
       .then((res) => res.json())
       .then((result) => {
-        setClasses(result);
+        setInstructors(result);
       });
   }, []);
 
@@ -19,8 +19,8 @@ const PopularInstructor = () => {
         {instructors.map((instructor) => (
           <div key={instructor._id} className="w-full sm:w-1/2 lg:w-1/3 p-4">
             <div className="card bg-base-100 shadow-xl mx-2">
-              <figure>
-                <img src={instructor.image} alt="Album" />
+              <figure className="h-96">
+                <img className="mt-24" src={instructor.image} alt="Album" />
               </figure>
               <div className="card-body">
                 <h2 className="card-title">{instructor.name}</h2>
@@ -36,7 +36,7 @@ const PopularInstructor = () => {
           
         ))}
         <div className="card-actions flex justify-center pb-8">
-                  <button className="btn btn-outline btn-error border-0 border-b-4 my-4">See All Classes</button>
+                  <button className="btn btn-outline btn-error border-0 border-b-4 my-4">See All Instructors</button>
                 </div>
       </div>
     </div>

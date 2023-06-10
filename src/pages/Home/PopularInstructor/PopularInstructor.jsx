@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-const PopularClasses = () => {
-  const [classes, setClasses] = useState([]);
+const PopularInstructor = () => {
+  const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/popularClass")
+    fetch("http://localhost:5000/popularInstructor")
       .then((res) => res.json())
       .then((result) => {
         setClasses(result);
@@ -13,22 +13,22 @@ const PopularClasses = () => {
 
   return (
     <div>
-      <h1 className="text-5xl font-bold py-8 text-center">Popular Classes!</h1>
+      <h1 className="text-5xl font-bold py-8 text-center">Popular Instructors!</h1>
 
       <div className="flex flex-wrap -m-4 justify-center">
-        {classes.map((clss) => (
-          <div key={clss._id} className="w-full sm:w-1/2 lg:w-1/3 p-4">
+        {instructors.map((instructor) => (
+          <div key={instructor._id} className="w-full sm:w-1/2 lg:w-1/3 p-4">
             <div className="card bg-base-100 shadow-xl mx-2">
               <figure>
-                <img src={clss.image} alt="Album" />
+                <img src={instructor.image} alt="Album" />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">{clss.name}</h2>
-                <p>{clss.description}</p>
-                <h3 className="font-bold text-2xl">Instructor: {clss.instructor}</h3>
+                <h2 className="card-title">{instructor.name}</h2>
+                <p>{instructor.description}</p>
+                <h3 className="font-bold text-2xl">Instructor: {instructor.instructor}</h3>
                 <div className="flex font-bold">
-                  <p>Price: ${clss.price}</p>
-                  <p>Available Seats: {clss.available_seats}</p>
+                  <p>Price: ${instructor.price}</p>
+                  <p>Available Seats: {instructor.available_seats}</p>
                 </div>
               </div>
             </div>
@@ -43,4 +43,4 @@ const PopularClasses = () => {
   );
 };
 
-export default PopularClasses;
+export default PopularInstructor;

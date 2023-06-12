@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../provider/AuthProvider";
 
@@ -10,9 +10,13 @@ const Register = () => {
   } = useForm();
 
   const {createUser} = useContext(AuthContext);
+  const [photoUrl, setPhotoUrl] = useState("");
+  console(photoUrl);
 
   const onSubmit = (data) => {
+    setPhotoUrl(data.photoUrl);
     createUser(data.email, data.password, data.photoUrl)
+    
     .then(result => {
         const loggedUser = result.user;
         console.log(loggedUser);

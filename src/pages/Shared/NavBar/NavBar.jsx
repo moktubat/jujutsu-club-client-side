@@ -32,7 +32,11 @@ const NavBar = () => {
             Dashboard
           </Link>
           <div className="w-10 rounded-full">
-            <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+            {user.photoUrl && (
+              <div className="w-10 rounded-full">
+                <img src={user.photoUrl} alt="User" />
+              </div>
+            )}
           </div>
           <button onClick={handleLogOut} className="text-white font-semibold">
             Logout
@@ -80,7 +84,7 @@ const NavBar = () => {
             {/* Mobile navigation toggle */}
             <div className="lg:hidden flex items-center">
               <button onClick={() => setToggleMenu(!toggleMenu)}>
-                <Bars3Icon className="h-6" />
+                <Bars3Icon className="h-6" style={{ color: "white" }} />
               </button>
             </div>
           </div>

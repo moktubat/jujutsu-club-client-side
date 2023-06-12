@@ -13,7 +13,7 @@ const PopularInstructor = () => {
 
   return (
     <div>
-      <h1 className="text-5xl font-bold py-8 text-center">Popular Instructors!</h1>
+      <h2 className="text-5xl font-bold py-8 text-center">Popular Instructors!</h2>
 
       <div className="flex flex-wrap -m-4 justify-center">
         {instructors.map((instructor) => (

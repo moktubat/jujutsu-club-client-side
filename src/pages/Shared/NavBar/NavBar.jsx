@@ -16,13 +16,13 @@ const NavBar = () => {
   };
   const navLinks = (
     <>
-      <Link className="text-white font-semibold" href="/">
+      <Link className="text-white font-semibold" to="/">
         Home
       </Link>
-      <Link className="text-white font-semibold" href="#">
+      <Link className="text-white font-semibold" to="/allInstructors">
         Instructors
       </Link>
-      <Link className="text-white font-semibold" href="#">
+      <Link className="text-white font-semibold" to="/allClasses">
         Classes
       </Link>
 

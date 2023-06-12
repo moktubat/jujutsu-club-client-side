@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const PopularClasses = () => {
   const [classes, setClasses] = useState([]);
@@ -25,7 +26,9 @@ const PopularClasses = () => {
               <div className="card-body">
                 <h2 className="card-title">{clss.name}</h2>
                 <p>{clss.description}</p>
-                <h3 className="font-bold text-2xl">Instructor: {clss.instructor}</h3>
+                <h3 className="font-bold text-2xl">
+                  Instructor: {clss.instructor}
+                </h3>
                 <div className="flex font-bold">
                   <p>Price: ${clss.price}</p>
                   <p>Available Seats: {clss.available_seats}</p>
@@ -33,11 +36,14 @@ const PopularClasses = () => {
               </div>
             </div>
           </div>
-          
         ))}
         <div className="card-actions flex justify-center pb-8">
-                  <button className="btn btn-outline btn-error border-0 border-b-4 my-4">See All Classes</button>
-                </div>
+          <Link to="/allClasses">
+            <button className="btn btn-outline btn-error border-0 border-b-4 my-4">
+              See All Classes
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

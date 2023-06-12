@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const PopularInstructor = () => {
-  const [instructors, setInstructors] = useState([]);
+const AllInstructors = () => {
+
+    const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/popularInstructor")
+    fetch("http://localhost:5000/instructors")
       .then((res) => res.json())
       .then((result) => {
         setInstructors(result);
       });
   }, []);
 
-  return (
-    <div>
+    return (
+            <div>
       <h2 className="text-5xl font-bold py-8 text-center">
-        Popular Instructors!
+      OUR INSTRUCTORS!
       </h2>
 
       <div className="flex flex-wrap -m-4 justify-center">
@@ -36,19 +37,20 @@ const PopularInstructor = () => {
                   <p>Available Seats: {instructor.available_seats}</p>
                 </div>
               </div>
-            </div>
-          </div>
-        ))}
-        <div className="card-actions flex justify-center pb-8">
+              <div className="card-actions flex justify-center pb-8">
           <Link to="/allInstructors">
             <button className="btn btn-outline btn-error border-0 border-b-4 my-4">
-              See All Instructors
+              See Classes
             </button>
           </Link>
         </div>
+            </div>
+          </div>
+        ))}
+
       </div>
     </div>
-  );
+    );
 };
 
-export default PopularInstructor;
+export default AllInstructors;

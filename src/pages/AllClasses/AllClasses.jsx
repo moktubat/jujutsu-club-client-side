@@ -1,13 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AllClasses = () => {
   const [classes, setClasses] = useState([]);
   const [selectedClasses, setSelectedClasses] = useState([]);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
     fetch("http://localhost:5000/classes")
       .then((res) => res.json())
@@ -17,8 +19,15 @@ const AllClasses = () => {
   }, []);
 
   const handleSelectClass = (clss) => {
-    if (user) {
-      fetch("http://localhost:5000/selected")
+    if (user && user.email) {
+        const selectClass = {selectClassId: clss._id, name: clss.name, image: clss.image, price: clss.price, email: user.email}
+      fetch("http://localhost:5000/selected", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(selectClass),
+      })
         .then((res) => res.json())
         .then((data) => {
           if (data.insertedId) {
@@ -38,7 +47,7 @@ const AllClasses = () => {
               confirmButtonText: "Login Now!",
             }).then((result) => {
               if (result.isConfirmed) {
-                navigate("/login");
+                navigate("/login", { state: { from: location } });
               }
             });
           }

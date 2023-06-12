@@ -1,25 +1,37 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../provider/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const {
     register,
-    handleSubmit,
+    handleSubmit, reset,
     formState: { errors },
   } = useForm();
 
-  const {createUser} = useContext(AuthContext);
-  const [photoUrl, setPhotoUrl] = useState("");
-  console(photoUrl);
+  const {createUser, updateUserProfile} = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    setPhotoUrl(data.photoUrl);
-    createUser(data.email, data.password, data.photoUrl)
-    
+    console.log(data);
+    createUser(data.email, data.password)
     .then(result => {
         const loggedUser = result.user;
         console.log(loggedUser);
+        updateUserProfile(data.name, data.photoURL)
+        .then(() => {
+          reset();
+          Swal.fire({
+            icon: "success",
+            title: "Registration successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate('/');
+        })
+        .catch(error => console.log(error))
     })
   };
 
@@ -147,23 +159,23 @@ const Register = () => {
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="photoUrl"
+            htmlFor="photoURL"
           >
             Photo URL
           </label>
           <input
             className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-              errors.photoUrl ? "border-red-500" : ""
+              errors.photoURL ? "border-red-500" : ""
             }`}
             type="text"
-            name="photoUrl"
-            id="photoUrl"
+            name="photoURL"
+            id="photoURL"
             placeholder="Enter the URL of your photo"
-            {...register("photoUrl", { required: "Photo URL is required" })}
+            {...register("photoURL", { required: "Photo URL is required" })}
           />
-          {errors.photoUrl && (
+          {errors.photoURL && (
             <p className="text-red-500 text-xs italic">
-              {errors.photoUrl.message}
+              {errors.photoURL.message}
             </p>
           )}
         </div>

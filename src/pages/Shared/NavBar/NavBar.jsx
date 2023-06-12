@@ -14,6 +14,7 @@ const NavBar = () => {
       .then(() => {})
       .catch((error) => console.log(error));
   };
+
   const navLinks = (
     <>
       <Link className="text-white font-semibold" to="/">
@@ -31,16 +32,14 @@ const NavBar = () => {
           <Link className="text-white font-semibold" to="/dashboard">
             Dashboard
           </Link>
-          <div className="w-10 rounded-full">
-            {user.photoUrl && (
-              <div className="w-10 rounded-full">
-                <img src={user.photoUrl} alt="User" />
-              </div>
-            )}
-          </div>
-          <button onClick={handleLogOut} className="text-white font-semibold">
+          {user.photoURL && (
+            <div className="w-10 h-10 rounded-full overflow-hidden">
+              <img className="w-full h-full" src={user.photoURL} alt="User" />
+            </div>
+          )}
+          <Link onClick={handleLogOut} className="text-white font-semibold">
             Logout
-          </button>
+          </Link>
         </>
       ) : (
         <>
@@ -55,21 +54,21 @@ const NavBar = () => {
   return (
     <nav className="bg-[#252525]">
       <div className="max-w-4xl mx-auto">
-        <div className="flex mx-auto justify-between w-3/4 ">
+        <div className="flex mx-auto justify-between w-3/4">
           {/* Primary menu and logo */}
           <div className="flex items-center gap-24 my-4">
             {/* logo */}
             <div>
               <a
                 href="/"
-                className="flex gap-1 font-bold text-white items-center "
+                className="flex gap-1 font-bold text-white items-center"
               >
                 <img className="w-20" src={logo} alt="" />
                 <span>Jujutsu Club</span>
               </a>
             </div>
             {/* primary */}
-            <div className="hidden lg:flex gap-8 ">{navLinks}</div>
+            <div className="hidden lg:flex gap-8">{navLinks}</div>
           </div>
           {/* secondary */}
           <div className="flex gap-6">
@@ -92,12 +91,12 @@ const NavBar = () => {
       </div>
       {/* mobile navigation */}
       <div
-        className={`fixed z-40 w-full  bg-[#252525] overflow-hidden flex flex-col lg:hidden gap-12  origin-top duration-700 ${
+        className={`fixed z-40 w-full bg-[#252525] overflow-hidden flex flex-col lg:hidden gap-12 origin-top duration-700 ${
           !toggleMenu ? "h-0" : "h-full"
         }`}
       >
         <div className="px-8">
-          <div className="flex flex-col gap-8 font-bold tracking-wider">
+          <div className="flex flex-col gap-8 font-bold tracking-wider items-center">
             {navLinks}
           </div>
         </div>

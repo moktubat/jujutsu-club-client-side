@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AllClasses = () => {
   const [classes, setClasses] = useState([]);
-  const isLoggedInAsAdmin = true;
-  const isLoggedInAsInstructor = true;
-
+  const [selectedClasses, setSelectedClasses] = useState([]);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   useEffect(() => {
     fetch("http://localhost:5000/classes")
       .then((res) => res.json())
@@ -13,6 +15,58 @@ const AllClasses = () => {
         setClasses(result);
       });
   }, []);
+
+  const handleSelectClass = (clss) => {
+    if (user) {
+      fetch("http://localhost:5000/selected")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.insertedId) {
+            Swal.fire({
+              icon: "success",
+              title: "Class Selected successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          } else {
+            Swal.fire({
+              title: "Please login to select the class",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Login Now!",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                navigate("/login");
+              }
+            });
+          }
+        });
+    } else {
+      Swal.fire({
+        title: "Please login to select the class",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login Now!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+
+    if (selectedClasses.includes(clss)) {
+      setSelectedClasses(
+        selectedClasses.filter((selectedClass) => selectedClass !== clss)
+      );
+    } else {
+      setSelectedClasses([...selectedClasses, clss]);
+    }
+  };
+
   return (
     <div className="mb-12">
       <div
@@ -46,7 +100,9 @@ const AllClasses = () => {
           <div
             key={clss._id}
             className={`w-full sm:w-1/2 lg:w-1/3 p-4 ${
-              clss.available_seats === 0 ? "bg-red-600 rounded-lg" : "bg-base-100"
+              clss.available_seats === 0
+                ? "bg-red-600 rounded-lg"
+                : "bg-base-100"
             }`}
           >
             <div
@@ -68,21 +124,27 @@ const AllClasses = () => {
                 </div>
               </div>
               <div className="card-actions flex justify-center pb-8">
-                {clss.available_seats === 0 ||
-                isLoggedInAsAdmin ||
-                isLoggedInAsInstructor ? (
+                {clss.available_seats === 0 ? (
                   <button
                     className="btn btn-outline btn-error border-0 border-b-4 my-4"
                     disabled
                   >
-                    Enroll Class
+                    {selectedClasses.includes(clss)
+                      ? "Selected Class"
+                      : "Class Full"}
                   </button>
                 ) : (
-                  <Link to="/allClasses">
-                    <button className="btn btn-outline btn-error border-0 border-b-4 my-4">
-                      Enroll Class
-                    </button>
-                  </Link>
+                  <button
+                    onClick={() => handleSelectClass(clss)}
+                    className={`btn btn-outline btn-error border-0 border-b-4 my-4 ${
+                      selectedClasses.includes(clss) ? "disabled" : ""
+                    }`}
+                    disabled={selectedClasses.includes(clss)}
+                  >
+                    {selectedClasses.includes(clss)
+                      ? "Selected Class"
+                      : "Select Class"}
+                  </button>
                 )}
               </div>
             </div>

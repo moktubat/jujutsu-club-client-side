@@ -51,7 +51,6 @@ const AllInstructors = () => {
               </figure>
               <div className="card-body">
                 <h2 className="card-title text-2xl">{instructor.name}</h2>
-                <p>{instructor.description}</p>
                 <h3 className="font-bold">
                   Email:{" "}
                   <a className="underline" href={`mailto:${instructor.email}`}>

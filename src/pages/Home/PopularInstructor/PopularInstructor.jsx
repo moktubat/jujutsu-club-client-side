@@ -26,14 +26,16 @@ const PopularInstructor = () => {
                 <img className="mt-24" src={instructor.image} alt="Album" />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">{instructor.name}</h2>
-                <p>{instructor.description}</p>
-                <h3 className="font-bold text-2xl">
-                  Instructor: {instructor.instructor}
+                <h2 className="card-title font-bold text-2xl">{instructor.name}</h2>
+                <p>{instructor.short_description}</p>
+                <h3 className="font-bold">
+                  Email:{" "}
+                  <a className="underline" href={`mailto:${instructor.email}`}>
+                    {instructor.email}
+                  </a>
                 </h3>
                 <div className="flex font-bold">
-                  <p>Price: ${instructor.price}</p>
-                  <p>Available Seats: {instructor.available_seats}</p>
+                <p>Number of Classes: {instructor.classes_taken}</p>
                 </div>
               </div>
             </div>

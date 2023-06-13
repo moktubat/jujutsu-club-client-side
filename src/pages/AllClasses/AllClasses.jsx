@@ -2,10 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import useSelected from "../../hook/useSelected";
 
 const AllClasses = () => {
   const [classes, setClasses] = useState([]);
   const [selectedClasses, setSelectedClasses] = useState([]);
+  const [select, refetch] = useSelected();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,7 +22,13 @@ const AllClasses = () => {
 
   const handleSelectClass = (clss) => {
     if (user && user.email) {
-        const selectClass = {selectClassId: clss._id, name: clss.name, image: clss.image, price: clss.price, email: user.email}
+      const selectClass = {
+        selectClassId: clss._id,
+        name: clss.name,
+        image: clss.image,
+        price: clss.price,
+        email: user.email,
+      };
       fetch("http://localhost:5000/selected", {
         method: "POST",
         headers: {
@@ -31,6 +39,7 @@ const AllClasses = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.insertedId) {
+            refetch();
             Swal.fire({
               icon: "success",
               title: "Class Selected successfully",
@@ -103,6 +112,11 @@ const AllClasses = () => {
             />
           </div>
         </div>
+      </div>
+      <div>
+        <h2 className="mb-8 text-center text-2xl font-bold">
+          Selected Class: {select?.length || 0}
+        </h2>
       </div>
       <div className="flex flex-wrap -m-4 justify-center">
         {classes.map((clss) => (

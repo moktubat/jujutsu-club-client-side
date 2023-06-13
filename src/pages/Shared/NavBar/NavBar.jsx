@@ -29,7 +29,7 @@ const NavBar = () => {
 
       {user ? (
         <>
-          <Link className="text-white font-semibold" to="/dashboard">
+          <Link className="text-white font-semibold" to="/dashboard/myClass">
             Dashboard
           </Link>
           {user.photoURL && (

@@ -42,7 +42,7 @@ const Slider = () => {
             polearms.
           </p>
           <button className="btn btn-outline glass btn-error btn-lg mt-4">
-              Explore now
+              Payment Now
             </button>
         </div>
       </div>

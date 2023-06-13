@@ -77,11 +77,11 @@ const AllClasses = () => {
     }
 
     if (selectedClasses.includes(clss)) {
-      setSelectedClasses(
-        selectedClasses.filter((selectedClass) => selectedClass !== clss)
+      setSelectedClasses((prevSelectedClasses) =>
+        prevSelectedClasses.filter((selectedClass) => selectedClass !== clss)
       );
     } else {
-      setSelectedClasses([...selectedClasses, clss]);
+      setSelectedClasses((prevSelectedClasses) => [...prevSelectedClasses, clss]);
     }
   };
 

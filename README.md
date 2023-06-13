@@ -1,1 +1,3 @@
-"# b712-summer-camp-client-side-moktubat" 
+### Summer Camp
+
+![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)

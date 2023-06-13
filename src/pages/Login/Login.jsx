@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -51,12 +52,7 @@ const Login = () => {
             </p>
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-[#242323] font-semibold">
-            <div className="text-center">
-              <button className="w-10 h-10 mt-4 items-center justify-center inline-flex rounded-full font-bold text-blue-700 text-lg border-2 border-blue-700">
-                G
-              </button>
-              <p className="text-gray-100 pt-2">or use email your account</p>
-            </div>
+            <SocialLogin></SocialLogin>
 
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">

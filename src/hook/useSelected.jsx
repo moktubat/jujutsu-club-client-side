@@ -4,8 +4,7 @@ import { AuthContext } from "../provider/AuthProvider";
 
 const useSelected = () => {
   const { user } = useContext(AuthContext);
-
-  const { isLoading, refetch, data: select = [] } = useQuery({
+  const { refetch, data: select = [] } = useQuery({
     queryKey: ["selected", user?.email],
     queryFn: async () => {
       const res = await fetch(
@@ -14,7 +13,7 @@ const useSelected = () => {
       return res.json();
     },
   });
-  return [select, isLoading, refetch];
+  return [select, refetch];
 };
 
 export default useSelected;

@@ -3,8 +3,10 @@ import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useSelected from "../../hook/useSelected";
 import useAuth from "../../hook/useAuth";
+import useTitle from "../../hook/useTitel";
 
 const AllClasses = () => {
+  useTitle("Classes");
   const [classes, setClasses] = useState([]);
   const [selectedClasses, setSelectedClasses] = useState([]);
   const [select, refetch] = useSelected();

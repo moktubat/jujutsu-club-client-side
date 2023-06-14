@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useTitle from "../../hook/useTitel";
 
 const Register = () => {
+  useTitle("Register");
   const {
     register,
     handleSubmit,

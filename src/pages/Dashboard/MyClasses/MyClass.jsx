@@ -2,8 +2,10 @@ import Swal from "sweetalert2";
 import useSelected from "../../../hook/useSelected";
 import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useTitle from "../../../hook/useTitel";
 
 const MyClass = () => {
+  useTitle("My Class");
   const [select, refetch] = useSelected();
   const total = select.reduce((sum, item) => item.price + sum, 0);
 
@@ -18,9 +20,12 @@ const MyClass = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://summer-camp-server-moktubat.vercel.app/selected/${item._id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://summer-camp-server-moktubat.vercel.app/selected/${item._id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deleteCount > 0) {
@@ -38,7 +43,7 @@ const MyClass = () => {
         <h3 className="text-2xl">Total Items: {select.length}</h3>
         <h3 className="text-2xl">Total Price: ${total}</h3>
         <Link to="/dashboard/payment">
-        <button className="btn btn-warning btn-sm">Pay Now</button>
+          <button className="btn btn-warning btn-sm">Pay Now</button>
         </Link>
       </div>
       <div className="mx-10">
@@ -74,7 +79,7 @@ const MyClass = () => {
                   <td>{item.name}</td>
                   <td className="text-end">$ {item.price}</td>
                   <td>
-                    <button 
+                    <button
                       onClick={() => handleDelete(item)}
                       className="btn bg-red-600 text-white hover:bg-white hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600"
                     >

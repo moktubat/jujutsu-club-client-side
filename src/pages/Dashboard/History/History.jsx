@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useTitle from "../../../hook/useTitel";
 
 const History = () => {
+  useTitle("Payment History");
   const [paymentHistory, setPaymentHistory] = useState([]);
 
   useEffect(() => {
@@ -10,7 +12,9 @@ const History = () => {
 
   const fetchPaymentHistory = async () => {
     try {
-      const response = await axios.get("https://summer-camp-server-moktubat.vercel.app/payments");
+      const response = await axios.get(
+        "https://summer-camp-server-moktubat.vercel.app/payments"
+      );
       const sortedHistory = response.data.sort((a, b) => b.date - a.date);
       setPaymentHistory(sortedHistory);
     } catch (error) {

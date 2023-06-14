@@ -2,31 +2,36 @@ import { QueryClient, useQuery } from "@tanstack/react-query";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hook/useAxiosSecure";
+import useTitle from "../../../hook/useTitel";
 
 const AllUsers = () => {
-    const [axiosSecure] = useAxiosSecure();
+  useTitle("All User");
+  const [axiosSecure] = useAxiosSecure();
   const { data: users = [], refetch } = useQuery(["users"], async () => {
     const res = await axiosSecure.get("/users");
     return res.data;
   });
 
-  const handleMakeAdmin = user => {
-    fetch(`https://summer-camp-server-moktubat.vercel.app/users/admin/${user._id}`, {
-        method: 'PATCH'
-    })
-    .then(res => res.json())
-    .then(data => {
-        console.log(data)
-        if(data.modifiedCount){
-            refetch();
-            Swal.fire({
-                icon: 'success',
-                title: `${user.name} is Admin Now`,
-                showConfirmButton: 'false',
-                timer: 1500
-            })
+  const handleMakeAdmin = (user) => {
+    fetch(
+      `https://summer-camp-server-moktubat.vercel.app/users/admin/${user._id}`,
+      {
+        method: "PATCH",
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            icon: "success",
+            title: `${user.name} is Admin Now`,
+            showConfirmButton: "false",
+            timer: 1500,
+          });
         }
-    })
+      });
   };
 
   const handleDelete = (id) => {
@@ -41,14 +46,15 @@ const AllUsers = () => {
       cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/users/${id}`)
+        axiosSecure
+          .delete(`/users/${id}`)
           .then(() => {
             QueryClient.invalidateQueries("users");
             Swal.fire({
               icon: "success",
               title: "User Deleted",
               showConfirmButton: false,
-              timer: 1500
+              timer: 1500,
             });
           })
           .catch((error) => {
@@ -93,9 +99,16 @@ const AllUsers = () => {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>
-                    { user.role === 'admin' ? 'admin' :
-                    <button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost bg-orange-600 text-white">Admin</button>
-                    }
+                    {user.role === "admin" ? (
+                      "admin"
+                    ) : (
+                      <button
+                        onClick={() => handleMakeAdmin(user)}
+                        className="btn btn-ghost bg-orange-600 text-white"
+                      >
+                        Admin
+                      </button>
+                    )}
                   </td>
                   <td>
                     <button

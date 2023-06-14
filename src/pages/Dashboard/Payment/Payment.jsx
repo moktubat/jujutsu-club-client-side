@@ -2,8 +2,10 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import useSelected from "../../../hook/useSelected";
+import useTitle from "../../../hook/useTitel";
 
 const Payment = () => {
+  useTitle("Payment");
   const [select] = useSelected();
   const stripePromise = loadStripe(import.meta.env.VITE_Payment_PK);
   const total = select.reduce((sum, item) => sum + item.price, 0);

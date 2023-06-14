@@ -4,8 +4,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
 import SocialLogin from "../Shared/SocialLogin/SocialLogin";
+import useTitle from "../../hook/useTitel";
 
 const Login = () => {
+  useTitle("Login");
   const { signIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();

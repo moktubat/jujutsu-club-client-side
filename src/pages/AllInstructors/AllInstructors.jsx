@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useTitle from "../../hook/useTitel";
 
 const AllInstructors = () => {
+  useTitle("Instructors");
   const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {

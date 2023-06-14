@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Bars3Icon } from "@heroicons/react/24/outline";
+import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
 import useAdmin from "../../../hook/useAdmin";
@@ -89,7 +89,7 @@ const NavBar = () => {
             {/* Mobile navigation toggle */}
             <div className="lg:hidden flex items-center">
               <button onClick={() => setToggleMenu(!toggleMenu)}>
-                <Bars3Icon className="h-6" style={{ color: "white" }} />
+                <GiHamburgerMenu className="h-6" style={{ color: "white" }} />
               </button>
             </div>
           </div>

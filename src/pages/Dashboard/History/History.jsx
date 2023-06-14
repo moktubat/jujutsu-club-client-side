@@ -10,7 +10,7 @@ const History = () => {
 
   const fetchPaymentHistory = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/payments");
+      const response = await axios.get("https://summer-camp-server-moktubat.vercel.app/payments");
       const sortedHistory = response.data.sort((a, b) => b.date - a.date);
       setPaymentHistory(sortedHistory);
     } catch (error) {

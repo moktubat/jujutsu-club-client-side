@@ -13,7 +13,7 @@ const AllClasses = () => {
   const location = useLocation();
 
   useEffect(() => {
-    fetch("http://localhost:5000/classes")
+    fetch("https://summer-camp-server-moktubat.vercel.app/classes")
       .then((res) => res.json())
       .then((result) => {
         setClasses(result);
@@ -29,7 +29,7 @@ const AllClasses = () => {
         price: clss.price,
         email: user.email,
       };
-      fetch("http://localhost:5000/selected", {
+      fetch("https://summer-camp-server-moktubat.vercel.app/selected", {
         method: "POST",
         headers: {
           "content-type": "application/json",

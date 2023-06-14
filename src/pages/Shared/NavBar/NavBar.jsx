@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../provider/AuthProvider";
-import { useContext } from "react";
+import useAdmin from "../../../hook/useAdmin";
+import useAuth from "../../../hook/useAuth";
 
 const NavBar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut } = useAuth();
+  const isAdmin = useAdmin();
 
   const handleLogOut = () => {
     logOut()
@@ -29,9 +31,15 @@ const NavBar = () => {
 
       {user ? (
         <>
-          <Link className="text-white font-semibold" to="/dashboard/myClass">
-            Dashboard
-          </Link>
+          {isAdmin ? (
+            <Link className="text-white font-semibold" to="/dashboard/allUsers">
+              Dashboard
+            </Link>
+          ) : (
+            <Link className="text-white font-semibold" to="/dashboard/myClass">
+              Dashboard
+            </Link>
+          )}
           {user.photoURL && (
             <div className="w-10 h-10 rounded-full overflow-hidden">
               <img className="w-full h-full" src={user.photoURL} alt="User" />
@@ -42,11 +50,9 @@ const NavBar = () => {
           </Link>
         </>
       ) : (
-        <>
-          <Link className="text-white font-semibold" to="/login">
-            Login
-          </Link>
-        </>
+        <Link className="text-white font-semibold" to="/login">
+          Login
+        </Link>
       )}
     </>
   );
@@ -59,13 +65,13 @@ const NavBar = () => {
           <div className="flex items-center gap-24 my-4">
             {/* logo */}
             <div>
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="flex gap-1 font-bold text-white items-center"
               >
                 <img className="w-20" src={logo} alt="" />
                 <span>Jujutsu Club</span>
-              </a>
+              </Link>
             </div>
             {/* primary */}
             <div className="hidden lg:flex gap-8">{navLinks}</div>
@@ -90,17 +96,17 @@ const NavBar = () => {
         </div>
       </div>
       {/* mobile navigation */}
-      <div
-        className={`fixed z-40 w-full bg-[#252525] overflow-hidden flex flex-col lg:hidden gap-12 origin-top duration-700 ${
-          !toggleMenu ? "h-0" : "h-full"
-        }`}
+      <motion.div
+        className="fixed z-40 w-full bg-[#252525] overflow-hidden flex flex-col lg:hidden gap-12 origin-top duration-700"
+        initial={{ height: 0 }}
+        animate={{ height: toggleMenu ? "100%" : 0 }}
       >
         <div className="px-8">
           <div className="flex flex-col gap-8 font-bold tracking-wider items-center">
             {navLinks}
           </div>
         </div>
-      </div>
+      </motion.div>
     </nav>
   );
 };

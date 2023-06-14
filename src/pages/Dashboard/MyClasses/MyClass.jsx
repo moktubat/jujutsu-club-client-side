@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import useSelected from "../../../hook/useSelected";
 import { FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const MyClass = () => {
   const [select, refetch] = useSelected();
@@ -36,7 +37,9 @@ const MyClass = () => {
       <div className="flex justify-evenly h-[60px] text-white bg-gradient-to-l from-red-600 to-yellow-600 p-1 mb-4 items-center rounded-lg">
         <h3 className="text-2xl">Total Items: {select.length}</h3>
         <h3 className="text-2xl">Total Price: ${total}</h3>
+        <Link to="/dashboard/payment">
         <button className="btn btn-warning btn-sm">Pay Now</button>
+        </Link>
       </div>
       <div className="mx-10">
         <div className="overflow-x-auto">
@@ -71,7 +74,7 @@ const MyClass = () => {
                   <td>{item.name}</td>
                   <td className="text-end">$ {item.price}</td>
                   <td>
-                    <button
+                    <button 
                       onClick={() => handleDelete(item)}
                       className="btn bg-red-600 text-white hover:bg-white hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600"
                     >

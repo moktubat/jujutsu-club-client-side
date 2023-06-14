@@ -1,14 +1,14 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../provider/AuthProvider";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useSelected from "../../hook/useSelected";
+import useAuth from "../../hook/useAuth";
 
 const AllClasses = () => {
   const [classes, setClasses] = useState([]);
   const [selectedClasses, setSelectedClasses] = useState([]);
   const [select, refetch] = useSelected();
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -81,8 +81,12 @@ const AllClasses = () => {
         prevSelectedClasses.filter((selectedClass) => selectedClass !== clss)
       );
     } else {
-      setSelectedClasses((prevSelectedClasses) => [...prevSelectedClasses, clss]);
+      setSelectedClasses((prevSelectedClasses) => [
+        ...prevSelectedClasses,
+        clss,
+      ]);
     }
+    refetch(selectedClasses);
   };
 
   return (
